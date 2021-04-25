@@ -35,7 +35,11 @@ class Uuid {
 	
 	static var rndSeed:Int = Std.int(Timer.stamp() * 1000);
 	static var state0 = splitmix64_seed(rndSeed);
-	static var state1 = splitmix64_seed(rndSeed + 1);
+	static var state1 = splitmix64_seed(currentTime());
+
+	private static function currentTime():Int {
+		return Math.round(Date.now().getTime());
+	}
 
 	private static function splitmix64_seed(index:Int):Int64 {
 		var result:Int64 = (index + Int64.make(0x9E3779B9, 0x7F4A7C15));
